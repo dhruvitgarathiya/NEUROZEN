@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Margarine&display=swap');
+@import "tailwindcss";
+
+
+.Margarine {
+  font-family: 'Margarine', cursive;
+}
