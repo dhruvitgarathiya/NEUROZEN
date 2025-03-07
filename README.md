@@ -19,7 +19,7 @@
 <img src="https://i.ibb.co/xq8z41Cq/Screenshot-409.png" alt="Screenshot-409" border="0">
 <img src="https://i.ibb.co/FbL2q4xF/Screenshot-410.png" alt="Screenshot-410" border="0">
 <img src="https://i.ibb.co/r2hpzbvw/Screenshot-411.png" alt="Screenshot-411" border="0">
-<img src="https://i.ibb.co/b57tHmWp/Screenshot-412.png" alt="Screenshot-412" border="0">
+
 <img src="https://i.ibb.co/v6vJDhRY/Screenshot-413.png" alt="Screenshot-413" border="0">
 <img src="https://i.ibb.co/PHwJSFD/Screenshot-414.png" alt="Screenshot-414" border="0">
 
