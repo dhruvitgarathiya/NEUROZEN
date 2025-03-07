@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import ExerciseCard from "./ExerciseCard";
 
-const ExercisePage = ({ exercises, selectedMood="stressed",onSelect }) => {
+const ExercisePage = ({ exercises, selectedMood ,onSelect }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Get unique moods/categories

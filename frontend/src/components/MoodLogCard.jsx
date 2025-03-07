@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import BottomNavBar from "./BottomBar";
 
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
@@ -81,7 +82,7 @@ const MoodLogCard = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 text-center">
+    <div className="max-w-lg mx-auto m-6 bg-white shadow-lg rounded-lg p-6 text-center pb-20">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">How are you feeling today?</h2>
 
       {/* Mood Selection */}
@@ -156,6 +157,8 @@ const MoodLogCard = () => {
           </button>
         </div>
       )}
+
+      <BottomNavBar/>
     </div>
   );
 };

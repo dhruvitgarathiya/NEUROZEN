@@ -157,12 +157,12 @@ export default function ProfileSetup() {
             {step === 3 && (
               <>
                 <div>
-                  <label className="block text-gray-700 font-semibold">Height</label>
+                  <label className="block text-gray-700 font-semibold">Height(in cm)</label>
                   <Field name="height" type="number" className="w-full p-3 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
                   <ErrorMessage name="height" component="div" className="text-red-500 text-sm mt-1" />
                 </div>
                 <div>
-                  <label className="block text-gray-700 font-semibold">Weight</label>
+                  <label className="block text-gray-700 font-semibold">Weight(in kg)</label>
                   <Field name="weight" type="number" className="w-full p-3 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
                   <ErrorMessage name="weight" component="div" className="text-red-500 text-sm mt-1" />
                 </div>

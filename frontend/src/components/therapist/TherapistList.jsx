@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Briefcase, User, ArrowRight } from "lucide-react";
+import BottomNavBar from "../BottomBar";
 
 const therapists = [
   {
@@ -24,7 +25,7 @@ const TherapistList = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
+    <div className="max-w-4xl mx-auto py-10 px-4 pb-20">
       <h2 className="text-4xl font-bold text-green-800 mb-8 text-center">Find Your Therapist</h2>
       <p className="text-center text-gray-600 max-w-lg mx-auto mb-8">
         Browse through our certified therapists and book a session that suits you best.
@@ -65,6 +66,8 @@ const TherapistList = () => {
           </motion.div>
         ))}
       </div>
+
+      <BottomNavBar/>
     </div>
   );
 };

@@ -27,11 +27,10 @@ const DailyGoals = ({ userProfile }) => {
                 - Gender: ${userProfile.gender}
                 - Height: ${userProfile.height} cm
                 - Weight: ${userProfile.weight} kg
-                - Activity Level: ${userProfile.activityLevel}
+                - Activity Level: ${userProfile.activityLevel[0]}
                 - Health Goals: ${userProfile.healthGoals}
                 - Diet Preference: ${userProfile.dietPreference}
-                - Medical Conditions: ${userProfile.medicalConditions.join(", ") || "None"}
-                - Medications: ${userProfile.medications.join(", ") || "None"}
+                - User is from ${userProfile.city} , ${userProfile.state} , ${userProfile.country}
 
                 Return the response strictly in **JSON format** with the following structure (make sure strings are not too big):
                 {

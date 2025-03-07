@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Heart, Move, BarChart, BookOpen, Smile, Link } from "lucide-react";
+import { Heart, Move, BarChart, BookOpen, Smile, Link, Music, UserSearch,Edit } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
 import DailyGoals from "../components/DailyGoals";
 import MoodRecommendation from "../components/recommendation/MoodRecommendation";
@@ -147,14 +147,14 @@ const Dashboard = () => {
           <Heart className="text-red-500" size={24} />
           <div>
             <h3 className="text-gray-600">Height</h3>
-            <p className="text-xl font-bold">{profile.height}</p>
+            <p className="text-xl font-bold">{profile?.height}</p>
           </div>
         </motion.div>
         <motion.div className="p-4 bg-white shadow-md rounded-xl flex items-center gap-4">
           <BarChart className="text-blue-500" size={24} />
           <div>
             <h3 className="text-gray-600">Weight</h3>
-            <p className="text-xl font-bold">{profile.weight}</p>
+            <p className="text-xl font-bold">{profile?.weight}</p>
           </div>
         </motion.div>
         <motion.div className="p-4 bg-white shadow-md rounded-xl flex items-center gap-4">
@@ -187,10 +187,48 @@ const Dashboard = () => {
         <BookOpen size={28} className="text-yellow-600 mb-2" />
         <h2 className="text-xl font-semibold">Boost Your Mindset with CBT Journaling</h2>
         <p className="text-gray-700 mt-2">Write down your thoughts, track patterns, and build resilience.</p>
-        <button className="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-lg shadow hover:bg-yellow-600">
+        <button 
+
+        onClick={() => navigate("/CBT")}
+        
+        className="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-lg shadow hover:bg-yellow-600">
           Start Journaling
         </button>
       </div>
+
+      <div className="mt-6 bg-blue-100 p-6 rounded-xl shadow-md">
+        <Music size={28} className="text-blue-600 mb-2" />
+        <h2 className="text-xl font-semibold">Heal with Music Therapy</h2>
+        <p className="text-gray-700 mt-2">Listen to calming tunes and boost your mood effortlessly.</p>
+        <button 
+          onClick={() => navigate("/moodMusic")}
+          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+          Explore Music
+        </button>
+      </div>
+
+      <div className="mt-6 bg-white p-6 rounded-xl shadow-md">
+        <UserSearch size={28} className="text-green-600 mb-2" />
+        <h2 className="text-xl font-semibold">Find the Right Therapist</h2>
+        <p className="text-gray-700 mt-2">Connect with a professional to guide you on your mental wellness journey.</p>
+        <button 
+          onClick={() => navigate("/therapist")}
+          className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600">
+          Find a Therapist
+        </button>
+      </div>
+
+      <div className="mt-6 bg-purple-100 p-6 rounded-xl shadow-md">
+        <Edit size={28} className="text-purple-600 mb-2" />
+        <h2 className="text-xl font-semibold">Track Your Mood</h2>
+        <p className="text-gray-700 mt-2">Log your emotions and identify patterns for better self-awareness.</p>
+        <button 
+          onClick={() => navigate("/moodLog")}
+          className="mt-4 bg-purple-500 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-600">
+          Start Logging
+        </button>
+      </div>
+
 
       {/* Mood-Based Recommendations */}
       {/* <MoodRecommendations moodLogs={moodLogs} className="mt-6" /> */}

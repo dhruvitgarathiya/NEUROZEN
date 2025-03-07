@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ExerciseList from "../components/exercise/ExerciseList";
 import ExerciseDetails from "../components/exercise/ExerciseDetails";
@@ -139,7 +139,14 @@ const sampleExercises = [
 
 
 
-const BreathingExercise = ({ mood = "stressed" }) => {
+const BreathingExercise = () => {
+  const [mood, setMood] = useState("");
+  useEffect(() => {
+    const logs = JSON.parse(localStorage.getItem("moodLogs")) || [];
+    const moodLog = logs[logs.length - 1]?.mood;
+    setMood(moodLog);
+
+  },[]);
   const [selectedExercise, setSelectedExercise] = useState(null);
 
   return (
@@ -154,7 +161,7 @@ const BreathingExercise = ({ mood = "stressed" }) => {
       {selectedExercise ? (
         <ExerciseDetails exercise={selectedExercise} onBack={() => setSelectedExercise(null)} />
       ) : (
-        <ExerciseList mood={mood} onSelect={setSelectedExercise} exercises={sampleExercises} />
+        <ExerciseList selectedMood={mood} onSelect={setSelectedExercise} exercises={sampleExercises} />
       )}
       <BottomNavBar/>
     </div>

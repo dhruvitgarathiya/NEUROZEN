@@ -2,6 +2,7 @@ import React from "react";
 import CBTJournaling from "../components/CBTThoughts";
 import { motion } from "framer-motion";
 import { BookOpen, PenTool, Brain, SendHorizontal, CheckCircle2 } from "lucide-react";
+import BottomNavBar from "../components/BottomBar";
 
 const steps = [
   { icon: BookOpen, title: "Understand CBT Journaling", desc: "CBT journaling helps you identify negative thought patterns and reframe them for a healthier mindset." },
@@ -69,6 +70,7 @@ const CBTJournalingPage = () => {
         </motion.div>
 
       </div>
+      <BottomNavBar/>
     </div>
   );
 };
