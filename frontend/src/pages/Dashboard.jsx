@@ -6,29 +6,127 @@ import DailyGoals from "../components/DailyGoals";
 import MoodRecommendation from "../components/recommendation/MoodRecommendation";
 import BottomNavBar from "../components/BottomBar";
 // import MoodRecommendations from "./MoodRecommendations";
+import { useUser } from "../context/userProvider";
+import { useNavigate } from "react-router-dom";
 
-const userProfile = {
-    age: 28,
-    gender: "female",
-    height: 165,
-    weight: 60,
-    activityLevel: "moderate",
-    healthGoals: "increase stamina",
-    dietPreference: "vegetarian",
-    medicalConditions: ["Anemia"],
-    medications: ["Iron supplements"],
-  };
+// const userProfile = {
+//     age: 28,
+//     gender: "female",
+//     height: 165,
+//     weight: 60,
+//     activityLevel: "moderate",
+//     healthGoals: "increase stamina",
+//     dietPreference: "vegetarian",
+//     medicalConditions: ["Anemia"],
+//     medications: ["Iron supplements"],
+//   };
+
+
+
 
 const Dashboard = () => {
+
   const [moodLogs, setMoodLogs] = useState('');
   const [steps, setSteps] = useState(null);
   const [isGoogleFitConnected, setIsGoogleFitConnected] = useState(false);
+  const [token, setToken] = useState(null);
+  const navigate = useNavigate();
+
+  const {profile,setProfile,user} = useUser();
+
+  const handelGoogleFitConnect = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/auth/google", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+
+      if (data.success && data.authUrl) {
+        window.open(data.authUrl, "_blank");
+        localStorage.setItem("googleAuthUrl", data.authUrl);
+      }
+    } catch (error) {
+      console.error("Error connecting to Google Fit: ", error);
+    }
+  };
+
+  
+  
+
+
+
+  useEffect(() => {
+    const Localtoken = localStorage.getItem("token");
+    if (Localtoken) {
+      setToken(Localtoken);
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const profileRes = await fetch(`http://localhost:8080/api/user-profiles/user/${user._id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+  
+        if (!profileRes.ok) throw new Error("Failed to fetch profile");
+  
+        const profileData = await profileRes.json();
+        console.log("Profile Data:", profileData);
+        setProfile(profileData);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+  
+    if (user._id && token) {
+      fetchProfile();
+    }
+  }, [token, setProfile]);  // Dependencies to avoid unnecessary re-fetching
+
+
 
   useEffect(() => {
     const logs = JSON.parse(localStorage.getItem("moodLogs")) || [];
     const mood = logs[logs.length - 1]?.mood;
     console.log("logs: ", logs);
     setMoodLogs(mood);
+
+    const token = new URLSearchParams(window.location.search).get('token');
+    if (token) {
+      localStorage.setItem('auth_token', token);
+      setIsGoogleFitConnected(true);
+      const fetchSteps = async () => {
+        try {
+          const response = await fetch('https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              aggregateBy: [{
+                dataTypeName: 'com.google.step_count.delta',
+              }],
+              bucketByTime: { durationMillis: 86400000 },
+              startTimeMillis: Date.now() - 86400000,
+              endTimeMillis: Date.now(),
+            }),
+          });
+          const data = await response.json();
+          const steps = data.bucket[0]?.dataset[0]?.point[0]?.value[0]?.intVal || 0;
+          setSteps(steps);
+        } catch (error) {
+          console.error('Error fetching steps: ', error);
+        }
+      };
+
+      fetchSteps();
+    }
   }, []);
 
   return (
@@ -49,14 +147,14 @@ const Dashboard = () => {
           <Heart className="text-red-500" size={24} />
           <div>
             <h3 className="text-gray-600">Height</h3>
-            <p className="text-xl font-bold">5'8"</p>
+            <p className="text-xl font-bold">{profile.height}</p>
           </div>
         </motion.div>
         <motion.div className="p-4 bg-white shadow-md rounded-xl flex items-center gap-4">
           <BarChart className="text-blue-500" size={24} />
           <div>
             <h3 className="text-gray-600">Weight</h3>
-            <p className="text-xl font-bold">70 kg</p>
+            <p className="text-xl font-bold">{profile.weight}</p>
           </div>
         </motion.div>
         <motion.div className="p-4 bg-white shadow-md rounded-xl flex items-center gap-4">
@@ -67,7 +165,7 @@ const Dashboard = () => {
               <p className="text-xl font-bold">{steps || "Loading..."}</p>
             ) : (
               <button 
-                onClick={() => setIsGoogleFitConnected(true)} 
+                onClick={handelGoogleFitConnect} 
                 className="flex items-center gap-2 text-blue-500 hover:underline"
               >
                 <FaGoogle /> Connect Google Fit
@@ -79,7 +177,7 @@ const Dashboard = () => {
 
       {/* Daily Goals */}
       <div className="flex items-center justify-center flex-wrap w-full">
-      <DailyGoals userProfile={userProfile} className="mt-6" />
+      <DailyGoals userProfile={profile} className="mt-6" />
       <MoodRecommendation mood={moodLogs} className="mt-6" />
       </div>
       

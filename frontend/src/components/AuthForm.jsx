@@ -13,12 +13,6 @@ export default function AuthForm() {
 
   // Redirect to home if user is already logged in
 
-  useEffect(() => {
-  if (user !== null) {
-    navigate("/home");
-  }
-}, [user, navigate]);
-
   // Validation Schema
   const validationSchema = Yup.object({
     name: !isLogin ? Yup.string().required("Name is required") : Yup.string(),
@@ -37,46 +31,54 @@ export default function AuthForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(values), // Include confirmPassword in the request body
+      body: JSON.stringify(values),
     });
-
+  
     const data = await response.json();
-
+  
     setUser(data.user);
-
     console.log("Response Data:", data);
-
+  
     if (response.ok) {
       localStorage.setItem("token", data.token.token);
       console.log("Token:", data.token.token);
       const userId = data.user._id;
       console.log("User ID:", userId);
-      const profileResponse = await fetch(`http://localhost:8080/api/user-profiles/user/${userId}`, {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${data.token.token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (profileResponse.ok) {
+  
+      try {
+        const profileResponse = await fetch(
+          `http://localhost:8080/api/user-profiles/user/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${data.token.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+  
+        if (!profileResponse.ok) throw new Error("Failed to fetch profile");
+  
         const profileData = await profileResponse.json();
+        console.log("Profile Data:", profileData);
         setProfile(profileData);
-
-        if (profileData) {
+  
+        // Navigate based on profile data
+        if (profile) {
           navigate("/home");
         } else {
           navigate("/profile");
         }
-      } else {
-        navigate("/profile");
+      } catch (error) {
+        console.log("Error fetching user profile:", error);
+        navigate("/profile"); // If there's an error fetching profile, go to profile setup
       }
-
     } else {
-      alert(data.message || "Something went wrong");
+      console.log("Login/Signup failed.");
+      navigate("/profile");
     }
   };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-green-300 to-green-500 p-4">
       <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg">

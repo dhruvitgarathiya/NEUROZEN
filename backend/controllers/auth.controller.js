@@ -52,6 +52,7 @@ const googleAuth = (req, res) => {
 
 const googleCallback = async (req, res) => {
   const { code } = req.query;
+  console.log(code);
   try {
     const { tokens } = await oAuth2Client.getToken(code);
     oAuth2Client.setCredentials(tokens);
@@ -64,12 +65,8 @@ const googleCallback = async (req, res) => {
     req.session.tokens = tokens; // Store tokens in session
     req.session.userProfile = profile; // Store userProfile in session
     userProfileData = profile; // Set userProfileData here
-  
-    res.status(200).json({
-      success: true,
-      message: "Authentication successful",
-      profile
-    });
+
+    res.redirect(`http://localhost:5173/home?token=${tokens.access_token}`);
   } catch (error) {
     console.error("Authentication error:", error);
     res.status(400).json({

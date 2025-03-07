@@ -22,6 +22,7 @@ import ProfilePage from "./pages/ProfilePage"
 import { UserProvider } from "./context/userProvider"
 import ProtectedRoute from "./components/protectedRoute/protectedRoutes"
 import { useUser } from "./context/userProvider"
+import MeetingPage from "./pages/MeetingPage"
 
 
 //remove this temporary data after integrating with backend
@@ -127,6 +128,12 @@ function App() {
         <ProtectedRoute>
         <ProfilePage user={user} healthData={healthData}
         />
+        </ProtectedRoute>
+        }/>
+
+      <Route path="/meeting" element={
+        <ProtectedRoute>
+        <MeetingPage/>
         </ProtectedRoute>
         }/>
 
