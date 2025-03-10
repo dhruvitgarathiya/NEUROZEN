@@ -5,7 +5,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="h-screen flex flex-col lg:flex-row items-center justify-between text-center lg:text-left bg-gradient-to-b from-green-300 to-green-500 text-white px-6 lg:px-20">
+    <section className="min-h-screen pt-18 flex flex-col lg:flex-row items-center justify-between text-center lg:text-left bg-gradient-to-b from-green-300 to-green-500 text-white px-6 lg:px-20">
       {/* Left Side: Text */}
       <div className="flex-1 max-w-lg lg:pr-10">
         <motion.h1
@@ -34,7 +34,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2 }}
-        className="flex-1 flex justify-center lg:justify-end mt-8 lg:mt-0"
+        className="flex-1 flex justify-center lg:justify-end p-2 mt-8 lg:mt-0"
       >
         <img
           src="https://allinforhealth.info/wp-content/uploads/2018/05/mental-health-illustration_634548677.jpg"
@@ -47,6 +47,7 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
 
 
 

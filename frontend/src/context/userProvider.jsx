@@ -55,11 +55,26 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("token");
+    // Clear all local storage
+    localStorage.clear();
+  
+    // Clear all session storage
+    sessionStorage.clear();
+  
+    // Clear all cookies
+    document.cookie.split(";").forEach((cookie) => {
+      const [name] = cookie.split("=");
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    });
+  
+    // Reset state
     setUser(null);
     setProfile(null);
+  
+    // Navigate to auth page
     navigate("/auth");
   };
+  
 
   // useEffect(() => {
   //   console.log("🚀 useEffect triggered on app open");

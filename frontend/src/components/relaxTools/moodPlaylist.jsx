@@ -15,36 +15,36 @@ const moodPlaylists = {
     {
       name: "Happy Vibes",
       url: "https://open.spotify.com/playlist/37i9dQZF1DXdPec7aLTmlC",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "https://i.scdn.co/image/ab67616d0000b273a2b4a0276e46788d3f9b6b56",
     },
     {
       name: "Feel Good",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/205/1000x0/feel-good-1586947464-m1y8kbZ5x7.jpg",
     },
   ],
   Sad: [
     {
       name: "Sad Songs",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX7qK8ma5wgG1",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "",
     },
     {
       name: "Heartbreak",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "",
     },
   ],
   Relaxed: [
     {
       name: "Chill Vibes",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX3Ogo9pFvBkY",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "",
     },
     {
       name: "Relax & Unwind",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "",
     },
   ],
   Energetic: [
@@ -65,24 +65,24 @@ const moodPlaylists = {
     {
       name: "Deep Focus",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "",
     },
     {
       name: "Concentration",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "",
     },
   ],
   Angry: [
     {
       name: "Angry Metal",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX3YSRoSdA634",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "",
     },
     {
       name: "Rage Beats",
       url: "https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0",
-      cover: "https://i.scdn.co/image/ab67706f00000002a1e1e0e5d0e5d0e5d0e5d0e",
+      cover: "",
     },
   ],
 };
@@ -146,7 +146,7 @@ const MoodMusic = () => {
                 onClick={() => setSelectedPlaylist(playlist)}
               >
                 <img
-                  src={playlist.cover}
+                  src={playlist.cover || "https://i.pinimg.com/236x/e2/49/b6/e249b699dfdd4b7c316c18560e03f9bf.jpg"}
                   alt={playlist.name}
                   className="w-44 h-44 rounded-lg shadow-md"
                 />

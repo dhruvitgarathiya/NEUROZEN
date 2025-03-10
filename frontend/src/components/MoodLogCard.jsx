@@ -82,7 +82,7 @@ const MoodLogCard = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto m-6 bg-white shadow-lg rounded-lg p-6 text-center pb-20">
+    <div className="max-w-lg mx-auto m-6 bg-white rounded-lg p-6 text-center">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">How are you feeling today?</h2>
 
       {/* Mood Selection */}
@@ -157,8 +157,6 @@ const MoodLogCard = () => {
           </button>
         </div>
       )}
-
-      <BottomNavBar/>
     </div>
   );
 };

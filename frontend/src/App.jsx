@@ -23,6 +23,7 @@ import { UserProvider } from "./context/userProvider"
 import ProtectedRoute from "./components/protectedRoute/protectedRoutes"
 import { useUser } from "./context/userProvider"
 import MeetingPage from "./pages/MeetingPage"
+import ScrollToTop from "./components/ScrollToTop"
 
 
 //remove this temporary data after integrating with backend
@@ -72,6 +73,7 @@ function App() {
 
   return (
     <UserProvider>
+    <ScrollToTop/>
     <Routes>
       <Route path="/auth" element={<AuthForm/>}/>
       <Route path="/profile" element={
@@ -151,7 +153,7 @@ function App() {
         initial={{ x: "-100%", opacity: 0 }}
         animate={{ x: isChatOpen ? "0%" : "-100%", opacity: isChatOpen ? 1 : 0 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        className="fixed bottom-14 left-4  shadow-lg z-50"
+        className="fixed bottom-18 left-4  shadow-lg z-50"
       >
         <MentalHealthChatbot />
       </motion.div>

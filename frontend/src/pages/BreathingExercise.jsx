@@ -140,9 +140,10 @@ const sampleExercises = [
 
 
 const BreathingExercise = () => {
-  const [mood, setMood] = useState("");
+  const [mood, setMood] = useState("stressed");
   useEffect(() => {
-    const logs = JSON.parse(localStorage.getItem("moodLogs")) || [];
+    const logs = JSON.parse(localStorage.getItem("moodLogs"));
+    if(!logs) return;
     const moodLog = logs[logs.length - 1]?.mood;
     setMood(moodLog);
 

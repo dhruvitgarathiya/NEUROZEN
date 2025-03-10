@@ -5,21 +5,9 @@ import { FaGoogle } from "react-icons/fa";
 import DailyGoals from "../components/DailyGoals";
 import MoodRecommendation from "../components/recommendation/MoodRecommendation";
 import BottomNavBar from "../components/BottomBar";
-// import MoodRecommendations from "./MoodRecommendations";
 import { useUser } from "../context/userProvider";
 import { useNavigate } from "react-router-dom";
-
-// const userProfile = {
-//     age: 28,
-//     gender: "female",
-//     height: 165,
-//     weight: 60,
-//     activityLevel: "moderate",
-//     healthGoals: "increase stamina",
-//     dietPreference: "vegetarian",
-//     medicalConditions: ["Anemia"],
-//     medications: ["Iron supplements"],
-//   };
+import MoodLogCard from "../components/MoodLogCard";
 
 
 
@@ -30,6 +18,7 @@ const Dashboard = () => {
   const [steps, setSteps] = useState(null);
   const [isGoogleFitConnected, setIsGoogleFitConnected] = useState(false);
   const [token, setToken] = useState(null);
+  const [showMoodLog, setShowMoodLog] = useState(false);
   const navigate = useNavigate();
 
   const {profile,setProfile,user} = useUser();
@@ -60,6 +49,16 @@ const Dashboard = () => {
 
 
   useEffect(() => {
+     // Get today's date in YYYY-MM-DD format
+     const today = new Date().toISOString().split("T")[0];
+     const lastVisitDate = localStorage.getItem("lastMoodLogDate");
+ 
+     if (lastVisitDate !== today) {
+       // If it's the first visit today, show MoodLog and update last visit date
+       setShowMoodLog(true);
+       localStorage.setItem("lastMoodLogDate", today);
+     }
+ 
     const Localtoken = localStorage.getItem("token");
     if (Localtoken) {
       setToken(Localtoken);
@@ -92,9 +91,16 @@ const Dashboard = () => {
 
   useEffect(() => {
     const logs = JSON.parse(localStorage.getItem("moodLogs")) || [];
-    const mood = logs[logs.length - 1]?.mood;
+    const mood = logs[0]?.mood;
     console.log("logs: ", logs);
     setMoodLogs(mood);
+
+    // const logs = JSON.parse(localStorage.getItem("moodLogs")) || [];
+    // const latestMood = logs.length > 0 ? logs[logs.length - 1].mood : null;
+    // console.log("All Logs: ", logs);
+    // console.log("Latest Mood: ", latestMood);
+    // setMoodLogs(latestMood);
+
 
     const token = new URLSearchParams(window.location.search).get('token');
     if (token) {
@@ -254,6 +260,23 @@ const Dashboard = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* MoodLog Popup Modal */}
+      {showMoodLog && (
+        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50 p-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg relative w-full max-w-lg md:max-w-2xl max-h-[80vh] overflow-y-auto">
+            {/* Close Button */}
+            <button
+              className="absolute top-3 right-4 text-2xl font-bold text-gray-600 hover:text-black"
+              onClick={() => setShowMoodLog(false)}
+            >
+              ×
+            </button>
+            <MoodLogCard />
+          </div>
+        </div>
+      )}
+
 
       <BottomNavBar/>
     </div>
