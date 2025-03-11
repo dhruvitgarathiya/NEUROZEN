@@ -81,7 +81,7 @@ const MoodRecommendation = ({ mood }) => {
     const fetchRecommendation = async () => {
       setLoading(true);
       try {
-        const prompt = `The user has logged their mood as "${mood}". Suggest a relevant activity: music, breathing-exercise, or CBT journaling. Format response in JSON:
+        const prompt = `The user has logged their mood as "${mood}". Suggest a relevant activity: music, breathing-exercise, or CBT journaling. Ex. for stressed mood recommendation can be music breathing exercise or CBT show different everytime Format response in JSON:
         {
           "message": "A short motivating message relevant to the mood",
           "actionText": "Text for the button",

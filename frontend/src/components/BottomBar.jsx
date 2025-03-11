@@ -10,8 +10,8 @@ const BottomNavBar = () => {
   const navItems = [
     { id: "home", label: "Home", icon: <Home size={24} />, path: "/home" },
     { id: "journal", label: "Journal", icon: <NotebookPen size={24} />, path: "/CBT" },
-    { id: "profile", label: "Profile", icon: <User size={24} />, path: "/myProfile" },
     { id: "breathing", label: "Breathing", icon: <Wind size={24} />, path: "/breathing" },
+    { id: "profile", label: "Profile", icon: <User size={24} />, path: "/myProfile" },
   ];
 
   return (

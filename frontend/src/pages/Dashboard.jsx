@@ -56,7 +56,6 @@ const Dashboard = () => {
      if (lastVisitDate !== today) {
        // If it's the first visit today, show MoodLog and update last visit date
        setShowMoodLog(true);
-       localStorage.setItem("lastMoodLogDate", today);
      }
  
     const Localtoken = localStorage.getItem("token");
@@ -153,14 +152,14 @@ const Dashboard = () => {
           <Heart className="text-red-500" size={24} />
           <div>
             <h3 className="text-gray-600">Height</h3>
-            <p className="text-xl font-bold">{profile?.height}</p>
+            <p className="text-xl font-bold">{profile?.height} cm</p>
           </div>
         </motion.div>
         <motion.div className="p-4 bg-white shadow-md rounded-xl flex items-center gap-4">
           <BarChart className="text-blue-500" size={24} />
           <div>
             <h3 className="text-gray-600">Weight</h3>
-            <p className="text-xl font-bold">{profile?.weight}</p>
+            <p className="text-xl font-bold">{profile?.weight} kg</p>
           </div>
         </motion.div>
         <motion.div className="p-4 bg-white shadow-md rounded-xl flex items-center gap-4">
@@ -240,7 +239,7 @@ const Dashboard = () => {
       {/* <MoodRecommendations moodLogs={moodLogs} className="mt-6" /> */}
 
       {/* Trending Health Tips */}
-      <div className="mt-6">
+      <div className="mt-6 mb-6">
         <h2 className="text-xl font-semibold">Trending Health Tips</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
           <motion.div whileHover={{ scale: 1.05 }} className="p-4 bg-white shadow-md rounded-xl">

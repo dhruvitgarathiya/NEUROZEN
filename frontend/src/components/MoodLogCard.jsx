@@ -63,6 +63,7 @@ const MoodLogCard = () => {
         const updatedLogs = [newMoodEntry, ...moodLogs];
         setMoodLogs(updatedLogs);
         localStorage.setItem("moodLogs", JSON.stringify(updatedLogs));
+        localStorage.setItem("lastMoodLogDate", new Date().toISOString().split("T")[0]);
 
         setResponseMessage(parsedData["positive message"]);
       } else {
@@ -72,6 +73,7 @@ const MoodLogCard = () => {
       console.error("Error fetching Gemini response:", error);
       setResponseMessage("Error fetching message, try again.");
     }
+
 
     setLoading(false);
   };

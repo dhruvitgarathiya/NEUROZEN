@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import RazorpayCheckout from "../components/therapist/RazorPay";
 import { Star, Clock, CheckCircle } from "lucide-react";
 import BottomNavBar from "../components/BottomBar";
+import { Dialog } from "@headlessui/react";
 
 const therapistData = {
   1: {
@@ -37,6 +38,8 @@ const therapistData = {
 const TherapistDetails = () => {
   const { id } = useParams();
   const therapist = therapistData[id];
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!therapist) {
     return <p className="text-center text-red-500 text-lg mt-10">Therapist Not Found</p>;
@@ -44,20 +47,8 @@ const TherapistDetails = () => {
 
   return (
     <div className="max-w-3xl mx-auto py-8 px-6 m-6 bg-white shadow-lg rounded-lg pb-20">
-      {/* Profile Section */}
-      <motion.div 
-        initial={{ opacity: 0, y: -10 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        className="flex flex-col md:flex-row items-center gap-6"
-      >
-        <motion.img 
-          src={therapist.image} 
-          alt={therapist.name} 
-          className="w-40 h-40 rounded-full shadow-md border-4 border-green-500"
-          initial={{ scale: 0.9 }} 
-          animate={{ scale: 1 }}
-        />
-
+      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col md:flex-row items-center gap-6">
+        <motion.img src={therapist.image} alt={therapist.name} className="w-40 h-40 rounded-full shadow-md border-4 border-green-500" initial={{ scale: 0.9 }} animate={{ scale: 1 }} />
         <div className="text-center md:text-left">
           <h2 className="text-3xl font-bold text-green-800">{therapist.name}</h2>
           <p className="text-lg text-gray-600">{therapist.specialization}</p>
@@ -67,21 +58,20 @@ const TherapistDetails = () => {
         </div>
       </motion.div>
 
-      {/* Available Slots */}
       <div className="mt-6">
         <h3 className="text-lg font-semibold text-green-700 flex items-center gap-2">
           <Clock className="w-5 h-5 text-green-600" /> Available Time Slots
         </h3>
+        <p className="text-gray-600 mt-2">Select a time slot to book an appointment.</p>
         <div className="mt-2 flex flex-wrap gap-2">
           {therapist.slots.map((slot, index) => (
-            <span key={index} className="px-3 py-1 bg-green-100 text-green-700 rounded-md border border-green-500">
+            <button key={index} onClick={() => { setSelectedSlot(slot); setIsOpen(true); }} className="px-3 py-1 bg-green-100 text-green-700 rounded-md border border-green-500 hover:bg-green-200">
               {slot}
-            </span>
+            </button>
           ))}
         </div>
       </div>
 
-      {/* Reviews */}
       <div className="mt-6">
         <h3 className="text-lg font-semibold text-green-700 flex items-center gap-2">
           <Star className="w-5 h-5 text-yellow-500" /> Patient Reviews
@@ -101,15 +91,27 @@ const TherapistDetails = () => {
         </div>
       </div>
 
-      {/* Booking Button */}
-      <button className="mt-6">
-        <RazorpayCheckout therapist={therapist} />
-      </button>
+      {/* Modal for selecting a time slot */}
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+          <Dialog.Title className="text-xl font-semibold text-green-700">Confirm Appointment</Dialog.Title>
+          <p className="mt-2 text-gray-700">You have selected <strong>{selectedSlot}</strong>. Do you want to proceed?</p>
+          <div className="mt-4 space-x-4 md:space-y-4">
+            <RazorpayCheckout therapist={therapist} selectedSlot={selectedSlot} />
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsOpen(false)}
+              className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg shadow-md hover:bg-gray-400 mt-2"
+            >
+              Cancel
+            </motion.button>
+          </div>
+        </div>
+      </Dialog>
 
-      <BottomNavBar/>
+      <BottomNavBar />
     </div>
   );
 };
 
 export default TherapistDetails;
-
