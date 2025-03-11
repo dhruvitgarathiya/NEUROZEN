@@ -29,7 +29,7 @@ NEUROZEN is a **Physical & Mental Health and Wellness** platform that provides a
 
 ### 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/CODExJATIN/NEUROZEN-Team33.git
+git clone https://github.com/CODExJATIN/NEUROZEN.git
 cd NEUROZEN
 ```
 
