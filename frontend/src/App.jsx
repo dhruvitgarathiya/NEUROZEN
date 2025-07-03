@@ -26,36 +26,6 @@ import MeetingPage from "./pages/MeetingPage"
 import ScrollToTop from "./components/ScrollToTop"
 
 
-//remove this temporary data after integrating with backend
-// const userProfile = {
-//   age: 28,
-//   gender: "female",
-//   height: 165,
-//   weight: 60,
-//   activityLevel: "moderate",
-//   healthGoals: "increase stamina",
-//   dietPreference: "vegetarian",
-//   medicalConditions: ["Anemia"],
-//   medications: ["Iron supplements"],
-// };
-
-// const user = {
-//   fullname: "Jatin Parmar",
-//   email: "jjatinparmar54@gmail.com",
-// };
-
-// const healthData = {
-//   age: 20,
-//   gender: "male",
-//   activityLevel: ["Moderate"],
-//   healthGoals: ["Weight Loss", "Muscle Gain"],
-//   dietPreference: ["Vegetarian"],
-//   state: "Gujarat",
-//   city: "Ahmedabad City",
-//   country: "India",
-// };
-
-
 
 
 

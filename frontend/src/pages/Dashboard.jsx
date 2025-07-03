@@ -8,6 +8,8 @@ import BottomNavBar from "../components/BottomBar";
 import { useUser } from "../context/userProvider";
 import { useNavigate } from "react-router-dom";
 import MoodLogCard from "../components/MoodLogCard";
+import { Bell, Settings, UserCircle } from "lucide-react";
+import Notifications from "../components/Notifications";
 
 
 
@@ -22,10 +24,12 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const {profile,setProfile,user} = useUser();
+  const [notifications, setNotifications] = useState(3);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const handelGoogleFitConnect = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth/google", {
+      const response = await fetch("https://nuerozen-backend.onrender.com/auth/google", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +71,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const profileRes = await fetch(`http://localhost:8080/api/user-profiles/user/${user._id}`, {
+        const profileRes = await fetch(`https://nuerozen-backend.onrender.com/api/user-profiles/user/${user._id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
   
@@ -78,6 +82,7 @@ const Dashboard = () => {
         setProfile(profileData);
       } catch (error) {
         console.error("Error fetching user:", error);
+        navigate("/auth");
       }
     };
   
@@ -136,13 +141,56 @@ const Dashboard = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto pb-16">
-      <motion.div 
+
+    <motion.div 
         initial={{ opacity: 0, y: -20 }} 
         animate={{ opacity: 1, y: 0 }} 
         transition={{ duration: 0.6 }}
-        className="text-2xl font-semibold text-yellow-800 bg-yellow-100 p-6 rounded-2xl shadow-md border border-green-300 md:text-4xl"
-        >
-        🌿 Hey there! Ready to focus on your well-being today?
+        className="w-full bg-white shadow-md flex items-center justify-between px-4 py-3 rounded-2xl border border-green-300 md:px-6 md:py-4"
+      >
+        {/* Left - App Logo & Name */}
+        <div className="flex items-center gap-2">
+          <img src="/NEUROZENLOGO.png" alt="NeuroZen Logo" className="w-8 h-8 md:w-10 md:h-10" />
+          <h1 className="text-lg md:text-2xl font-bold text-green-800 tracking-wide">
+            NEUROZEN
+          </h1>
+        </div>
+
+        {/* Right - Notification, Settings, Profile */}
+        <div className="relative flex items-center gap-3">
+          {/* Notification Icon with Badge */}
+          <button 
+            className="relative p-2 rounded-lg hover:bg-gray-100 transition"
+            onClick={() => setShowNotifications(!showNotifications)}
+          >
+            <Bell className="w-6 h-6 text-green-700" />
+            {notifications > 0 && (
+              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                {notifications > 9 ? "9+" : notifications}
+              </span>
+            )}
+          </button>
+
+          {/* Notifications Popup */}
+          {showNotifications && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute top-10 right-0 w-80 bg-white shadow-lg rounded-lg border border-gray-200 z-50"
+            >
+              <Notifications />
+            </motion.div>
+          )}
+
+          {/* Profile Icon */}
+          <button
+            onClick={() => navigate("/myProfile")}
+            className="p-2 rounded-lg hover:bg-gray-100 transition"
+          >
+            <UserCircle className="w-6 h-6 text-green-700" />
+          </button>
+        </div>
       </motion.div>
 
 

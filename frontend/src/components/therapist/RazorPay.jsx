@@ -14,7 +14,7 @@ const RazorpayCheckout = ({ therapist }) => {
   const handlePayment = async (e) => {
 
 
-    const response = await fetch("http://localhost:8080/api/order", {
+    const response = await fetch("https://nuerozen-backend.onrender.com/api/order", {
       method: "POST",
       body: JSON.stringify({
         amount: therapist.price * 100,
@@ -42,7 +42,7 @@ const RazorpayCheckout = ({ therapist }) => {
         };
 
         const validateRes = await fetch(
-          "http://localhost:8080/api/validate",
+          "https://nuerozen-backend.onrender.com/api/validate",
           {
             method: "POST",
             body: JSON.stringify(body),

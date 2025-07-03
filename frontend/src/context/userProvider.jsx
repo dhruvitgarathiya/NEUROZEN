@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
   // Fetch user and profile data using token
   const fetchUserData = async (token) => {
     try {
-      const res = await fetch(`http://localhost:8080/api/user/me`, {
+      const res = await fetch(`https://nuerozen-backend.onrender.com/api/user/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
       if (!userId) throw new Error("User ID not found");
 
       // Fetch user profile
-      const profileRes = await fetch(`http://localhost:8080/api/user-profiles/user/${userId}`, {
+      const profileRes = await fetch(`https://nuerozen-backend.onrender.com/api/user-profiles/user/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

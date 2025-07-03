@@ -48,7 +48,7 @@ export default function ProfileSetup() {
   
     console.log("Final Payload:", updatedValues);
   
-    const response = await fetch("http://localhost:8080/api/user-profiles", {
+    const response = await fetch("https://nuerozen-backend.onrender.com/api/user-profiles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
