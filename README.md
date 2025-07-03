@@ -1,4 +1,4 @@
-﻿# NEUROZEN - Your Personal Health & Wellness Companion
+# NEUROZEN - Your Personal Health & Wellness Companion
 
 NEUROZEN is a **Physical & Mental Health and Wellness** platform that provides a **personalized experience** to help users achieve their **health goals**. 
 
