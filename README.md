@@ -130,7 +130,3 @@ npm start
 We welcome contributions! Feel free to submit a Pull Request.
 
 ---
-
-
- 
- 
