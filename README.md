@@ -3,11 +3,9 @@
 NEUROZEN is a **Physical & Mental Health and Wellness** platform that provides a **personalized experience** to help users achieve their **health goals**. 
 
 ---
+## Contributors
 
-## 🔗 Repositories
-
-- **Frontend**: [https://github.com/CODExJATIN/NUEROZEN-FRONTEND](https://github.com/CODExJATIN/NUEROZEN-FRONTEND)  
-- **Backend**: [https://github.com/CODExJATIN/NUEROZEN-BACKEND](https://github.com/CODExJATIN/NUEROZEN-BACKEND)
+- [Dhruvit Garathiya](https://github.com/dhruvitgarathiya): Worked on frontend part of the project also helped in backend creating APIS.
 
 ---
 
